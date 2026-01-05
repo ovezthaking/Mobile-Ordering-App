@@ -4,7 +4,13 @@ import { menuArray } from "./data.js"
 document.addEventListener('click', (e) => {
     if (e.target.dataset.addItem) handleAddItemClick(e.target.dataset.addItem)
     else if (e.target.dataset.removeItem) handleRemoveItemClick(e.target.dataset.removeItem)
+    else if (e.target.id === 'pay-btn'){
+        e.preventDefault()
+        handlePayClick()
+    }
+    else if(e.target.id === 'complete-btn') handleCompleteClick()
 })
+
 
 let orderItemId = 0
 
@@ -42,6 +48,20 @@ function handleRemoveItemClick(itemId){
     totalPriceInt -= price
 
     totalPrice.textContent = `$${totalPriceInt}`
+}
+
+function handlePayClick(){
+    document.querySelector('.order-details').innerHTML = `
+        <p id="thanks">Thanks, James! Your order is on the way!</p>
+    `
+    document.querySelector('.place-order').style.display ='none'
+}
+
+function handleCompleteClick(){
+    const totalPrice = document.getElementById('total-price')
+    let totalPriceInt = parseInt(totalPrice.textContent.slice(1))
+    
+    if(totalPriceInt > 0) document.querySelector('.place-order').style.display = 'flex'
 }
 
 function getProductsHtml(){
