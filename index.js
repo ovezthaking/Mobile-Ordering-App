@@ -5,7 +5,7 @@ function getProductsHtml(){
     const productsHtml = menuArray.map(product => {
         const { name, ingredients, id, price, emoji } = product
 
-        const ingredientsString = ingredients.join(',')
+        const ingredientsString = ingredients.join(', ')
         
         return `
             <section class="product">
